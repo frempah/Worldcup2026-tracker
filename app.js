@@ -5,33 +5,53 @@ const BASE_URL = 'https://api.football-data.org/v4';
 
 // ── STATIC GROUP DATA (2026 WC confirmed groups as fallback) ──
 const WC2026_GROUPS = {
-  A: { teams: ['Mexico', 'USA', 'Canada', 'TBD'] },
-  B: { teams: ['Argentina', 'Chile', 'Peru', 'TBD'] },
-  C: { teams: ['Brazil', 'Colombia', 'TBD', 'TBD'] },
-  D: { teams: ['France', 'Belgium', 'TBD', 'TBD'] },
-  E: { teams: ['Spain', 'Portugal', 'TBD', 'TBD'] },
-  F: { teams: ['England', 'Netherlands', 'TBD', 'TBD'] },
-  G: { teams: ['Germany', 'Austria', 'TBD', 'TBD'] },
-  H: { teams: ['Morocco', 'Senegal', 'TBD', 'TBD'] },
-  I: { teams: ['Ghana', 'Nigeria', 'TBD', 'TBD'] },
-  J: { teams: ['Japan', 'South Korea', 'TBD', 'TBD'] },
-  K: { teams: ['Saudi Arabia', 'Iran', 'TBD', 'TBD'] },
-  L: { teams: ['Australia', 'TBD', 'TBD', 'TBD'] },
+ // ── STATIC GROUP DATA (2026 WC confirmed groups as fallback) ──
+const WC2026_GROUPS = {
+  A: { teams: ['Mexico', 'USA', 'Canada', 'New Zealand'] },
+  B: { teams: ['Argentina', 'Chile', 'Ecuador', 'Jamaica'] },
+  C: { teams: ['Brazil', 'Colombia', 'Uruguay', 'Panama'] },
+  D: { teams: ['France', 'Belgium', 'Poland', 'Paraguay'] },
+  E: { teams: ['Spain', 'Portugal', 'Turkey', 'Honduras'] },
+  F: { teams: ['England', 'Netherlands', 'Serbia', 'Venezuela'] },
+  G: { teams: ['Germany', 'Austria', 'Scotland', 'Bolivia'] },
+  H: { teams: ['Morocco', 'Senegal', 'Mali', 'Japan'] },
+  I: { teams: ['Ghana', 'Nigeria', 'Egypt', 'South Korea'] },
+  J: { teams: ['Cameroon', 'DR Congo', 'South Africa', 'Iran'] },
+  K: { teams: ['Saudi Arabia', 'UAE', 'Uzbekistan', 'Croatia'] },
+  L: { teams: ['Australia', 'Switzerland', 'Denmark', 'Italy'] },
+};
+
 };
 
 const FLAGS = {
+  const FLAGS = {
+  // North America
   'Mexico': '🇲🇽', 'USA': '🇺🇸', 'Canada': '🇨🇦',
-  'Argentina': '🇦🇷', 'Chile': '🇨🇱', 'Peru': '🇵🇪',
-  'Brazil': '🇧🇷', 'Colombia': '🇨🇴',
-  'France': '🇫🇷', 'Belgium': '🇧🇪',
-  'Spain': '🇪🇸', 'Portugal': '🇵🇹',
-  'England': '🏴', 'Netherlands': '🇳🇱',
-  'Germany': '🇩🇪', 'Austria': '🇦',
-  'Morocco': '🇲🇦', 'Senegal': '🇸🇳',
-  'Ghana': '🇬🇭', 'Nigeria': '🇳🇬',
-  'Japan': '🇯🇵', 'South Korea': '🇰🇷',
-  'Saudi Arabia': '🇸🇦', 'Iran': '🇮🇷',
-  'Australia': '🇦🇺', 'TBD': '🏳️',
+  // South America
+  'Argentina': '🇦🇷', 'Chile': '🇨🇱', 'Ecuador': '🇪🇨',
+  'Brazil': '🇧🇷', 'Colombia': '🇨🇴', 'Uruguay': '🇺🇾',
+  'Paraguay': '🇵🇾', 'Venezuela': '🇻🇪', 'Bolivia': '🇧🇴',
+  // CONCACAF
+  'Jamaica': '🇯🇲', 'Panama': '🇵🇦', 'Honduras': '🇭🇳',
+  'New Zealand': '🇳🇿',
+  // Europe
+  'France': '🇫🇷', 'Belgium': '🇧🇪', 'Poland': '🇵🇱',
+  'Spain': '🇪🇸', 'Portugal': '🇵🇹', 'Turkey': '🇹🇷',
+  'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Netherlands': '🇳🇱', 'Serbia': '🇷🇸',
+  'Germany': '🇩🇪', 'Austria': '🇦🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+  'Croatia': '🇭🇷', 'Switzerland': '🇨🇭', 'Denmark': '🇩🇰',
+  'Italy': '🇮🇹',
+  // Africa
+  'Morocco': '🇲🇦', 'Senegal': '🇸🇳', 'Mali': '🇲🇱',
+  'Ghana': '🇬🇭', 'Nigeria': '🇳🇬', 'Egypt': '🇪🇬',
+  'Cameroon': '🇨🇲', 'DR Congo': '🇨🇩', 'South Africa': '🇿🇦',
+  // Asia
+  'Japan': '🇯🇵', 'South Korea': '🇰🇷', 'Iran': '🇮🇷',
+  'Saudi Arabia': '🇸🇦', 'UAE': '🇦🇪', 'Uzbekistan': '🇺🇿',
+  // Oceania
+  'Australia': '🇦🇺',
+};
+
 };
 
 // ── MAIN APP ──
