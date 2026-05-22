@@ -1,1 +1,101 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --bg: #0a0e1a;
+  --surface: #141928;
+  --gold: #c9a84c;
+  --text: #f0f0f0;
+  --muted: #8892a4;
+  --green: #22c55e;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  border-bottom: 1px solid #ffffff10;
+}
+
+.header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+.header p { color: var(--muted); font-size: 0.9rem; margin-top: 0.3rem; }
+
+.nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  border: 1px solid #ffffff15;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab.active {
+  background: var(--gold);
+  color: #0a0e1a;
+  border-color: var(--gold);
+}
+
+.match-list { padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+
+.match-card {
+  background: var(--surface);
+  border: 1px solid #ffffff10;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.match-date { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
+
+.match-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.team { font-weight: 700; font-size: 0.95rem; flex: 1; }
+.team:last-child { text-align: right; }
+.vs { color: var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; }
+
+.match-status {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.match-status.live { color: var(--green); }
+.match-status.finished { color: var(--gold); }
+
+.loader, .empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+}
