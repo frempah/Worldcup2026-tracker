@@ -1,6 +1,6 @@
 const { useState, useEffect } = React;
 
-const API_KEY = 'YOUR_API_KEY_HERE';
+const API_KEY = '63966ee47080428881fe646971ee918f';
 const BASE_URL = 'https://api.football-data.org/v4';
 
 function App() {
