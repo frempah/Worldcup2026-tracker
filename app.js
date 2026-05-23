@@ -367,11 +367,194 @@ function BracketCard({ match, matchNum, isFinal, isSelected, onSelect }) {
 }
 
 // ── PREDICT TAB ──
+// ── PREDICT DATA ──
+const PREDICT_MATCHES = [
+  // Group Stage Marquee Matches
+  { id: 'p1',  round: 'Group Stage', home: 'Mexico',       away: 'USA',         date: 'Jun 14' },
+  { id: 'p2',  round: 'Group Stage', home: 'Argentina',    away: 'Chile',       date: 'Jun 15' },
+  { id: 'p3',  round: 'Group Stage', home: 'Brazil',       away: 'Colombia',    date: 'Jun 16' },
+  { id: 'p4',  round: 'Group Stage', home: 'France',       away: 'Belgium',     date: 'Jun 16' },
+  { id: 'p5',  round: 'Group Stage', home: 'Spain',        away: 'Portugal',    date: 'Jun 17' },
+  { id: 'p6',  round: 'Group Stage', home: 'England',      away: 'Netherlands', date: 'Jun 17' },
+  { id: 'p7',  round: 'Group Stage', home: 'Germany',      away: 'Austria',     date: 'Jun 18' },
+  { id: 'p8',  round: 'Group Stage', home: 'Morocco',      away: 'Senegal',     date: 'Jun 18' },
+  { id: 'p9',  round: 'Group Stage', home: 'Ghana',        away: 'Nigeria',     date: 'Jun 19' },
+  { id: 'p10', round: 'Group Stage', home: 'Japan',        away: 'South Korea', date: 'Jun 20' },
+  // Knockout Predictions
+  { id: 'p11', round: 'Round of 32', home: 'Group A Win',  away: 'Group B 2nd', date: 'Jul 1'  },
+  { id: 'p12', round: 'Round of 32', home: 'Group C Win',  away: 'Group D 2nd', date: 'Jul 1'  },
+  { id: 'p13', round: 'Quarter Final', home: 'TBD',        away: 'TBD',         date: 'Jul 10' },
+  { id: 'p14', round: 'Semi Final',    home: 'TBD',        away: 'TBD',         date: 'Jul 14' },
+  { id: 'p15', round: 'The Final',     home: 'TBD',        away: 'TBD',         date: 'Jul 19' },
+];
+
+const ROUND_ORDER = ['Group Stage', 'Round of 32', 'Quarter Final', 'Semi Final', 'The Final'];
+
+// ── PREDICT TAB ──
 function PredictTab() {
-  return React.createElement('div', { className: 'center-msg' },
-    React.createElement('div', { className: 'empty-icon' }, '🎯'),
-    React.createElement('p', null, 'Predictions coming soon'),
-    React.createElement('span', { className: 'empty-sub' }, 'Pick your winners before each match')
+  const [predictions, setPredictions] = React.useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('wc2026_predictions') || '{}');
+    } catch { return {}; }
+  });
+  const [activeRound, setActiveRound] = React.useState('Group Stage');
+  const [savedFlash, setSavedFlash] = React.useState(false);
+
+  const rounds = ROUND_ORDER.filter(r =>
+    PREDICT_MATCHES.some(m => m.round === r)
+  );
+
+  const filteredMatches = PREDICT_MATCHES.filter(m => m.round === activeRound);
+  const totalPredicted = Object.keys(predictions).length;
+  const totalMatches = PREDICT_MATCHES.length;
+
+  function pickWinner(matchId, winner) {
+    const updated = { ...predictions, [matchId]: winner };
+    setPredictions(updated);
+    try {
+      localStorage.setItem('wc2026_predictions', JSON.stringify(updated));
+    } catch(e) {}
+    setSavedFlash(true);
+    setTimeout(() => setSavedFlash(false), 1500);
+  }
+
+  function clearPredictions() {
+    setPredictions({});
+    try { localStorage.removeItem('wc2026_predictions'); } catch(e) {}
+  }
+
+  return React.createElement('div', { className: 'predict-container' },
+
+    // Header
+    React.createElement('div', { className: 'predict-header' },
+      React.createElement('h2', { className: 'section-title' }, 'My Predictions'),
+      React.createElement('p', { className: 'section-sub' },
+        'Pick your winners before each match kicks off'
+      )
+    ),
+
+    // Progress bar
+    React.createElement('div', { className: 'predict-progress-wrap' },
+      React.createElement('div', { className: 'predict-progress-top' },
+        React.createElement('span', { className: 'progress-label' }, 'Your Progress'),
+        React.createElement('span', { className: 'progress-count' },
+          `${totalPredicted} / ${totalMatches} picked`
+        )
+      ),
+      React.createElement('div', { className: 'progress-bar-bg' },
+        React.createElement('div', {
+          className: 'progress-bar-fill',
+          style: { width: `${(totalPredicted / totalMatches) * 100}%` }
+        })
+      )
+    ),
+
+    // Save flash
+    savedFlash && React.createElement('div', { className: 'save-flash' },
+      '✅ Prediction saved!'
+    ),
+
+    // Round tabs
+    React.createElement('div', { className: 'predict-round-tabs' },
+      rounds.map(r =>
+        React.createElement('button', {
+          key: r,
+          className: `predict-round-tab ${activeRound === r ? 'active' : ''}`,
+          onClick: () => setActiveRound(r)
+        }, r)
+      )
+    ),
+
+    // Match prediction cards
+    React.createElement('div', { className: 'predict-matches' },
+      filteredMatches.map(match =>
+        React.createElement(PredictCard, {
+          key: match.id,
+          match,
+          picked: predictions[match.id],
+          onPick: (winner) => pickWinner(match.id, winner)
+        })
+      )
+    ),
+
+    // Bottom actions
+    React.createElement('div', { className: 'predict-actions' },
+      React.createElement('button', {
+        className: 'clear-btn',
+        onClick: clearPredictions
+      }, '🗑️ Clear All Predictions'),
+      React.createElement('div', { className: 'predict-disclaimer' },
+        '⚡ Predictions are saved on your device'
+      )
+    )
+  );
+}
+
+function PredictCard({ match, picked, onPick }) {
+  const isPending = match.home === 'TBD' || match.away === 'TBD';
+  const homeFlag  = FLAGS[match.home] || '🏳️';
+  const awayFlag  = FLAGS[match.away] || '🏳️';
+  const isFinal   = match.round === 'The Final';
+
+  return React.createElement('div', {
+    className: `predict-card ${isFinal ? 'predict-final-card' : ''}`
+  },
+    // Match info bar
+    React.createElement('div', { className: 'predict-match-info' },
+      React.createElement('span', { className: 'predict-round-tag' }, match.round),
+      React.createElement('span', { className: 'predict-date' }, match.date)
+    ),
+
+    // Teams row
+    React.createElement('div', { className: 'predict-teams-row' },
+
+      // Home button
+      React.createElement('button', {
+        className: `predict-team-btn ${picked === match.home ? 'picked' : ''} ${isPending ? 'pending-btn' : ''}`,
+        onClick: () => !isPending && onPick(match.home),
+        disabled: isPending
+      },
+        React.createElement('span', { className: 'predict-flag' }, homeFlag),
+        React.createElement('span', { className: 'predict-team-name' }, match.home),
+        picked === match.home &&
+          React.createElement('span', { className: 'picked-check' }, '✓')
+      ),
+
+      // Draw button
+      React.createElement('div', { className: 'predict-middle' },
+        React.createElement('button', {
+          className: `draw-btn ${picked === 'draw' ? 'picked-draw' : ''}`,
+          onClick: () => !isPending && onPick('draw'),
+          disabled: isPending
+        }, picked === 'draw' ? '✓ Draw' : 'Draw')
+      ),
+
+      // Away button
+      React.createElement('button', {
+        className: `predict-team-btn ${picked === match.away ? 'picked' : ''} ${isPending ? 'pending-btn' : ''}`,
+        onClick: () => !isPending && onPick(match.away),
+        disabled: isPending
+      },
+        React.createElement('span', { className: 'predict-flag' }, awayFlag),
+        React.createElement('span', { className: 'predict-team-name' }, match.away),
+        picked === match.away &&
+          React.createElement('span', { className: 'picked-check' }, '✓')
+      )
+    ),
+
+    // Picked result display
+    picked && React.createElement('div', { className: 'picked-result' },
+      React.createElement('span', null,
+        picked === 'draw'
+          ? '🤝 You predicted a Draw'
+          : `${FLAGS[picked] || '🏳️'} You picked ${picked} to win`
+      )
+    ),
+
+    // Pending overlay text
+    isPending && React.createElement('div', { className: 'pending-notice' },
+      '⏳ Available after Group Stage'
+    )
   );
 }
 
