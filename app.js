@@ -5,24 +5,25 @@ const BASE_URL = 'https://api.football-data.org/v4';
 
 const WC2026_GROUPS = {
   A: { teams: ['Mexico',  'South Africa',  'South Korea',  'Czech Republic'] },
-  B: { teams: ['Canada',   'Bosnia and Herzegovina',  'Qatar',  'Switzerland  '] },
+  B: { teams: ['Canada',   'Bosnia and Herzegovina',  'Qatar',  'Switzerland'] },
   C: { teams: ['Brazil',  'Morocco',  'Haiti',  'Scotland '] },
-  D: { teams: ['United States', 'Paraguay', 'Australia', 'Turkey '] },
+  D: { teams: ['United States', 'Paraguay', 'Australia', 'Turkey'] },
   E: { teams: ['Germany',  'Curaçao', 'ivory Coast',  'Ecuador'] },
   F: { teams: ['Netherlands',  'Japan', 'Sweden', 'Tunisia ']},
   G: { teams: ['Belgium', 'Egypt',  'Iran',  'New Zealand']},
   H: { teams: ['Spain', 'Cape Verde', 'Saudi Arabia',  'Uruguay']},
   I: { teams: ['France',  'Senegal',  'Iraq', 'Norway ']},
   J: { teams: ['Argentina', 'Algeria', 'Australia',  'Jordan']},
-  K: { teams: ['Portugal',  'DR Congo',  'Uzbekistan',  'Colombia ']},
+  K: { teams: ['Portugal',  'DR Congo',  'Uzbekistan',  'Colombia']},
 
-  L: { teams: ['England',  'Croatia',  'Ghana',  'Panama ']},
+  L: { teams: ['England',  'Croatia',  'Ghana',  'Panama']},
   
   
   
 };
 
 const FLAGS = {
+  
   'Mexico' :'🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czech Republic' :'🇨🇿',
   'Canada' :'🇨🇦',  'Bosnia and Herzegovina' :'🇧🇦', 'Qatar': '🇶🇦', 'Switzerland' :'🇨🇭 ',
   'Brazil' :'🇧🇷', 'Morocco': '🇲🇦', 'Haiti' :'🇭🇹', 'Scotland' :'🏴󠁧󠁢󠁳󠁣󠁴󠁿', 
@@ -32,8 +33,7 @@ const FLAGS = {
   'Belgium' :'🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand' :'🇳🇿',
   'Spain' :'🇪🇸', 'Cape Verde':'🇨🇻', 'Saudi Arabia': '🇸🇦','Uruguay' :'🇺🇾',
   'France' :'🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway' :'🇳🇴',
-  'Argentina' :"🇦🇷", 'Algeria': '🇩🇿', 'Australia': '🇦🇺', 'Jordan':'🇯🇴',
-
+  'Argentina' :'🇦🇷', 'Algeria': '🇩🇿', 'Australia': '🇦🇺', 'Jordan':'🇯🇴',
   'Portugal' :'🇵🇹', 'DR Congo': '🇨🇩', 'Uzbekistan': '🇺🇿', 'Colombia' :'🇨🇴',
   'England' :'🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama' :'🇵🇦', 
 
