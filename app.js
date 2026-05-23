@@ -6,7 +6,7 @@ const BASE_URL = 'https://api.football-data.org/v4';
 const WC2026_GROUPS = {
   A: { teams: ['Mexico',  'South Africa',  'South Korea',  'Czech Republic'] },
   B: { teams: ['Canada',   'Bosnia and Herzegovina',  'Qatar',  'Switzerland'] },
-  C: { teams: ['Brazil',  'Morocco',  'Haiti',  'Scotland '] },
+  C: { teams: ['Brazil',  'Morocco',  'Haiti',  'Scotland'] },
   D: { teams: ['United States', 'Paraguay', 'Australia', 'Turkey'] },
   E: { teams: ['Germany',  'Curaçao', 'ivory Coast',  'Ecuador'] },
   F: { teams: ['Netherlands',  'Japan', 'Sweden', 'Tunisia ']},
