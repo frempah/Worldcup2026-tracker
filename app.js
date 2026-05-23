@@ -94,6 +94,40 @@ const SLOT_LABELS = {
   'TBD':'To Be Determined',
 };
 
+// ── PREMIUM CONFIG ──
+const PAYSTACK_PUBLIC_KEY = 'pk_test_YOUR_KEY_HERE';
+const PREMIUM_AMOUNT = 2000; // GHS 20.00 (Paystack uses pesewas)
+const PREMIUM_KEY = 'wc2026_premium';
+
+function isPremium() {
+  try { return localStorage.getItem(PREMIUM_KEY) === 'true'; } 
+  catch { return false; }
+}
+
+function unlockPremium() {
+  try { localStorage.setItem(PREMIUM_KEY, 'true'); }
+  catch {}
+}
+
+function initPaystack(email, onSuccess) {
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    amount: PREMIUM_AMOUNT * 100, // convert to pesewas
+    currency: 'GHS',
+    ref: 'WC2026_' + Math.floor(Math.random() * 1000000000),
+    metadata: { custom_fields: [{ display_name: 'Product', value: 'WC2026 Premium' }] },
+    onSuccess: function(transaction) {
+      unlockPremium();
+      onSuccess();
+    },
+    onCancel: function() {
+      console.log('Payment cancelled');
+    }
+  });
+  handler.openIframe();
+}
+
 // ── APP ──
 function App() {
   const [matches, setMatches] = useState([]);
