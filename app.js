@@ -23,19 +23,19 @@ const WC2026_GROUPS = {
 };
 
 const FLAGS = {
-  'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czech Republic': '🇨🇿',
-  'Canada': '🇨🇦',  'Bosnia and Herzegovina' :'🇧🇦', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭 ',
-  'Brazil': '🇧🇷', 'Morocco': '🇲🇦', 'Haiti' :'🇭🇹', 'Scotland' :'🏴󠁧󠁢󠁳󠁣󠁴󠁿', 
-  'United States': '🇺🇸', 'Paraguay': '🇵🇾' ,'Australia': '🇦🇺' ,'Turkey' :'🇹🇷' ,
+  'Mexico' :'🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czech Republic': '🇨🇿',
+  'Canada' :'🇨🇦',  'Bosnia and Herzegovina' :'🇧🇦', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭 ',
+  'Brazil' :'🇧🇷', 'Morocco': '🇲🇦', 'Haiti' :'🇭🇹', 'Scotland' :'🏴󠁧󠁢󠁳󠁣󠁴󠁿', 
+  'United States' :'🇺🇸', 'Paraguay': '🇵🇾' ,'Australia': '🇦🇺' ,'Turkey' :'🇹🇷' ,
   'Germany' :'🇩🇪', 'Curaçao': '🇨🇼' , 'ivory Coast' :'🇨🇮',  'Ecuador' :'🇪🇨',
-  'Netherlands': '🇳🇱', 'Japan': '🇯🇵',  'Sweden':'🇸🇪',  'Tunisia': '🇹🇳',
-  'Belgium': '🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand':'🇳🇿',
-  'Spain': '🇪🇸', 'Cape Verde':'🇨🇻', 'Saudi Arabia': '🇸🇦','Uruguay': '🇺🇾',
-  'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
-  'Argentina': "🇦🇷", 'Algeria': '🇩🇿', 'Australia': '🇦🇺', 'Jordan':'🇯🇴',
+  'Netherlands' :'🇳🇱', 'Japan': '🇯🇵',  'Sweden':'🇸🇪',  'Tunisia': '🇹🇳',
+  'Belgium' :'🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand':'🇳🇿',
+  'Spain' :'🇪🇸', 'Cape Verde':'🇨🇻', 'Saudi Arabia': '🇸🇦','Uruguay': '🇺🇾',
+  'France' :'🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
+  'Argentina' :"🇦🇷", 'Algeria': '🇩🇿', 'Australia': '🇦🇺', 'Jordan':'🇯🇴',
 
-  'Portugal': '🇵🇹', 'DR Congo': '🇨🇩', 'Uzbekistan': '🇺🇿', 'Colombia': '🇨🇴',
-  'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦', 
+  'Portugal' :'🇵🇹', 'DR Congo': '🇨🇩', 'Uzbekistan': '🇺🇿', 'Colombia': '🇨🇴',
+  'England' :'🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦', 
 
 
   };
