@@ -16,7 +16,7 @@ const WC2026_GROUPS = {
   J: { teams: ['Argentina', 'Algeria', 'Australia',  'Jordan']},
   K: { teams: ['Portugal',  'DR Congo',  'Uzbekistan',  'Colombia ']},
 
-  L: { teams: ['England',  'Croatia',  'Ghana',  'Panama ']}
+  L: { teams: ['England',  'Croatia',  'Ghana',  'Panama ']},
   
   
   
