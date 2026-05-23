@@ -128,13 +128,71 @@ function initPaystack(email, onSuccess) {
   handler.openIframe();
 }
 
+function PremiumBanner({ onUnlock }) {
+  const [email, setEmail] = React.useState('');
+  const [showForm, setShowForm] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  function handlePay() {
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email');
+      return;
+    }
+    setLoading(true);
+    initPaystack(email, () => {
+      setLoading(false);
+      onUnlock();
+    });
+  }
+
+  if (!showForm) {
+    return React.createElement('div', { className: 'premium-banner' },
+      React.createElement('div', { className: 'premium-left' },
+        React.createElement('span', { className: 'premium-crown' }, '👑'),
+        React.createElement('div', null,
+          React.createElement('p', { className: 'premium-title' }, 'Go Premium'),
+          React.createElement('p', { className: 'premium-sub' }, 'Ad-free · Save predictions · GHS 20 once')
+        )
+      ),
+      React.createElement('button', {
+        className: 'premium-btn',
+        onClick: () => setShowForm(true)
+      }, 'Unlock')
+    );
+  }
+
+  return React.createElement('div', { className: 'premium-form-wrap' },
+    React.createElement('p', { className: 'premium-form-title' }, '👑 Unlock Premium — GHS 20'),
+    React.createElement('input', {
+      className: 'premium-input',
+      type: 'email',
+      placeholder: 'Enter your email',
+      value: email,
+      onChange: (e) => setEmail(e.target.value)
+    }),
+    React.createElement('div', { className: 'premium-form-btns' },
+      React.createElement('button', {
+        className: 'premium-pay-btn',
+        onClick: handlePay,
+        disabled: loading
+      }, loading ? 'Opening...' : '💳 Pay GHS 20'),
+      React.createElement('button', {
+        className: 'premium-cancel-btn',
+        onClick: () => setShowForm(false)
+      }, 'Cancel')
+    ),
+    React.createElement('p', { className: 'premium-secure' }, '🔒 Secured by Paystack')
+  );
+}
+
 // ── APP ──
 function App() {
-  const [matches, setMatches] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('matches');
+  const [matches, setMatches] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [activeTab, setActiveTab] = React.useState('matches');
+  const [premium, setPremium] = React.useState(isPremium());
 
-  useEffect(() => { fetchMatches(); }, []);
+  React.useEffect(() => { fetchMatches(); }, []);
 
   async function fetchMatches() {
     try {
@@ -158,7 +216,13 @@ function App() {
   ];
 
   return React.createElement('div', { className: 'app' },
-    React.createElement(Header, null),
+    React.createElement(Header, { premium }),
+
+    // Premium banner (only show to free users)
+    !premium && React.createElement(PremiumBanner, {
+      onUnlock: () => setPremium(true)
+    }),
+
     React.createElement('nav', { className: 'nav-tabs' },
       tabs.map(t =>
         React.createElement('button', {
@@ -168,19 +232,14 @@ function App() {
         }, t.label)
       )
     ),
+
+    // Ad slot (only show to free users)
+    !premium && React.createElement(AdSlot, null),
+
     activeTab === 'matches' && React.createElement(MatchesTab, { matches, loading }),
     activeTab === 'groups'  && React.createElement(GroupsTab, null),
     activeTab === 'bracket' && React.createElement(BracketTab, null),
     activeTab === 'predict' && React.createElement(PredictTab, null)
-  );
-}
-
-// ── HEADER ──
-function Header() {
-  return React.createElement('header', { className: 'header' },
-    React.createElement('div', { className: 'header-trophy' }, '🏆'),
-    React.createElement('h1', null, 'WORLD CUP 2026'),
-    React.createElement('p', null, 'Track Every Match · Build Your Bracket')
   );
 }
 
@@ -460,12 +519,16 @@ function PredictTab() {
   return React.createElement('div', { className: 'predict-container' },
 
     // Header
-    React.createElement('div', { className: 'predict-header' },
-      React.createElement('h2', { className: 'section-title' }, 'My Predictions'),
-      React.createElement('p', { className: 'section-sub' },
-        'Pick your winners before each match kicks off'
-      )
-    ),
+   function Header({ premium }) {
+  return React.createElement('header', { className: 'header' },
+    React.createElement('div', { className: 'header-trophy' }, '🏆'),
+    React.createElement('h1', null, 'WORLD CUP 2026'),
+    React.createElement('p', null, 'Track Every Match · Build Your Bracket'),
+    premium && React.createElement('div', { className: 'premium-badge' }, '👑 PREMIUM')
+  );
+}                          
+                             
+
 
     // Progress bar
     React.createElement('div', { className: 'predict-progress-wrap' },
