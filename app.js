@@ -4,40 +4,39 @@ const API_KEY = 'YOUR_API_KEY_HERE';
 const BASE_URL = 'https://api.football-data.org/v4';
 
 const WC2026_GROUPS = {
-  A: { teams: ['Mexico', 'USA', 'Canada', 'New Zealand'] },
-  B: { teams: ['Argentina', 'Chile', 'Ecuador', 'Jamaica'] },
-  C: { teams: ['Brazil', 'Colombia', 'Uruguay', 'Panama'] },
-  D: { teams: ['France', 'Belgium', 'Poland', 'Paraguay'] },
-  E: { teams: ['Spain', 'Portugal', 'Turkey', 'Honduras'] },
-  F: { teams: ['England', 'Netherlands', 'Serbia', 'Venezuela'] },
-  G: { teams: ['Germany', 'Austria', 'Scotland', 'Bolivia'] },
-  H: { teams: ['Morocco', 'Senegal', 'Mali', 'Japan'] },
-  I: { teams: ['Ghana', 'Nigeria', 'Egypt', 'South Korea'] },
-  J: { teams: ['Cameroon', 'DR Congo', 'South Africa', 'Iran'] },
-  K: { teams: ['Saudi Arabia', 'UAE', 'Uzbekistan', 'Croatia'] },
-  L: { teams: ['Australia', 'Switzerland', 'Denmark', 'Italy'] },
+  A: { teams: ['Mexico',  'South Africa',  'South Korea',  'Czech Republi'] },
+  B: { teams: ['Canada',   'Bosnia and Herzegovina',  'Qatar',  'Switzerland  '] },
+  C: { teams: ['Brazil',  'Morocco',  'Haiti',  'Scotland '] },
+  D: { teams: ['United States', 'Paraguay', 'Australia', 'Turkey '] },
+  E: { teams: ['Germany',  'Curaçao', 'ivory Coast',  'Ecuador'] },
+  F: { teams: ['Netherlands',  'Japan', 'Sweden', 'Tunisia ']},
+  G: { teams: ['Belgium', 'Egypt',  'Iran',  'New Zealand']},
+  H: { teams: ['Spain', 'Cape Verde', 'Saudi Arabia',  'Uruguay']},
+  I: { teams: ['France',  'Senegal',  'Iraq', 'Norway ']},
+  J: { teams: ['Argentina', 'Algeria', 'Australia',  'Jordan']},
+  K: { teams: ['Portugal',  'DR Congo',  'Uzbekistan',  'Colombia ']},
+  L: { teams: [['England',  'Croatia',  'Ghana',  'Panama ']}
+  
+  
+  
 };
 
 const FLAGS = {
-  'Mexico': '🇲🇽', 'USA': '🇺🇸', 'Canada': '🇨🇦',
-  'Argentina': '🇦🇷', 'Chile': '🇨🇱', 'Ecuador': '🇪🇨',
-  'Brazil': '🇧🇷', 'Colombia': '🇨🇴', 'Uruguay': '🇺🇾',
-  'Paraguay': '🇵🇾', 'Venezuela': '🇻🇪', 'Bolivia': '🇧🇴',
-  'Jamaica': '🇯🇲', 'Panama': '🇵🇦', 'Honduras': '🇭🇳',
-  'New Zealand': '🇳🇿',
-  'France': '🇫🇷', 'Belgium': '🇧🇪', 'Poland': '🇵🇱',
-  'Spain': '🇪🇸', 'Portugal': '🇵🇹', 'Turkey': '🇹🇷',
-  'England': '🇬🇧', 'Netherlands': '🇳🇱', 'Serbia': '🇷🇸',
-  'Germany': '🇩🇪', 'Austria': '🇦🇹', 'Scotland': '🇬🇧',
-  'Croatia': '🇭🇷', 'Switzerland': '🇨🇭', 'Denmark': '🇩🇰',
-  'Italy': '🇮🇹',
-  'Morocco': '🇲🇦', 'Senegal': '🇸🇳', 'Mali': '🇲🇱',
-  'Ghana': '🇬🇭', 'Nigeria': '🇳🇬', 'Egypt': '🇪🇬',
-  'Cameroon': '🇨🇲', 'DR Congo': '🇨🇩', 'South Africa': '🇿🇦',
-  'Japan': '🇯🇵', 'South Korea': '🇰🇷', 'Iran': '🇮🇷',
-  'Saudi Arabia': '🇸🇦', 'UAE': '🇦🇪', 'Uzbekistan': '🇺🇿',
-  'Australia': '🇦🇺',
-};
+  'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czech Republic': '🇨🇿',
+  'Canada': '🇨🇦',  'Bosnia and Herzegovina' :'🇧🇦', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭 ',
+  'Brazil': '🇧🇷', 'Morocco': '🇲🇦', 'Haiti' :'🇭🇹', 'Scotland' :'🏴󠁧󠁢󠁳󠁣󠁴󠁿', 
+  'United States': '🇺🇸', 'Paraguay': '🇵🇾' ,'Australia': '🇦🇺' ,'Turkey' :'🇹🇷' ,
+  'Germany' :'🇩🇪', 'Curaçao': '🇨🇼' , 'ivory Coast' :'🇨🇮',  'Ecuador' :'🇪🇨',
+  'Netherlands': '🇳🇱', 'Japan': '🇯🇵',  'Sweden':'🇸🇪',  'Tunisia': '🇹🇳',
+  'Belgium': '🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand':'🇳🇿',
+  'Spain': '🇪🇸', 'Cape Verde':'🇨🇻', 'Saudi Arabia': '🇸🇦','Uruguay': '🇺🇾',
+  'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
+  'Argentina': "🇦🇷", 'Algeria': '🇩🇿', 'Australia': '🇦🇺', 'Jordan':'🇯🇴',
+  'Portugal': "🇵🇹", "DR Congo': "🇨🇩", 'Uzbekistan':"🇺🇿", "Colombia": "🇨🇴", 
+  'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦', 
+
+
+  };
 
 const BRACKET_ROUNDS = [
   { id: 'r32', label: 'Round of 32',    matchCount: 16 },
