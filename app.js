@@ -1,6 +1,6 @@
 const { useState, useEffect } = React;
 
-const API_KEY = 'YOUR_API_KEY_HERE';
+const API_KEY = '63966ee47080428881fe646971ee918f';
 const BASE_URL = 'https://api.football-data.org/v4';
 
 const WC2026_GROUPS = {
@@ -15,7 +15,8 @@ const WC2026_GROUPS = {
   I: { teams: ['France',  'Senegal',  'Iraq', 'Norway ']},
   J: { teams: ['Argentina', 'Algeria', 'Australia',  'Jordan']},
   K: { teams: ['Portugal',  'DR Congo',  'Uzbekistan',  'Colombia ']},
-  L: { teams: [['England',  'Croatia',  'Ghana',  'Panama ']}
+
+  L: { teams: ['England',  'Croatia',  'Ghana',  'Panama ']}
   
   
   
@@ -32,7 +33,8 @@ const FLAGS = {
   'Spain': '🇪🇸', 'Cape Verde':'🇨🇻', 'Saudi Arabia': '🇸🇦','Uruguay': '🇺🇾',
   'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
   'Argentina': "🇦🇷", 'Algeria': '🇩🇿', 'Australia': '🇦🇺', 'Jordan':'🇯🇴',
-  'Portugal': "🇵🇹", "DR Congo': "🇨🇩", 'Uzbekistan':"🇺🇿", "Colombia": "🇨🇴", 
+
+  'Portugal': '🇵🇹', 'DR Congo': '🇨🇩', 'Uzbekistan': '🇺🇿', 'Colombia': '🇨🇴',
   'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦', 
 
 
