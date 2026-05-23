@@ -4,19 +4,19 @@ const API_KEY = '63966ee47080428881fe646971ee918f';
 const BASE_URL = 'https://api.football-data.org/v4';
 
 const WC2026_GROUPS = {
-  A: { teams: ['Mexico',  'South Africa',  'South Korea',  'Czech Republic'] },
-  B: { teams: ['Canada',   'Bosnia and Herzegovina',  'Qatar',  'Switzerland  '] },
-  C: { teams: ['Brazil',  'Morocco',  'Haiti',  'Scotland '] },
-  D: { teams: ['United States', 'Paraguay', 'Australia', 'Turkey '] },
+  A: { teams: ['Mexico',  'South Africa',  'South Korea',  'Czech Republic']},
+  B: { teams: ['Canada',   'Bosnia and Herzegovina',  'Qatar',  'Switzerland']},
+  C: { teams: ['Brazil',  'Morocco',  'Haiti',  'Scotland ']},
+  D: { teams: ['United States', 'Paraguay', 'Australia', 'Turkey ']},
   E: { teams: ['Germany',  'Curaçao', 'ivory Coast',  'Ecuador'] },
   F: { teams: ['Netherlands',  'Japan', 'Sweden', 'Tunisia ']},
   G: { teams: ['Belgium', 'Egypt',  'Iran',  'New Zealand']},
   H: { teams: ['Spain', 'Cape Verde', 'Saudi Arabia',  'Uruguay']},
   I: { teams: ['France',  'Senegal',  'Iraq', 'Norway ']},
   J: { teams: ['Argentina', 'Algeria', 'Australia',  'Jordan']},
-  K: { teams: ['Portugal',  'DR Congo',  'Uzbekistan',  'Colombia ']},
+  K: { teams: ['Portugal',  'DR Congo',  'Uzbekistan',  'Colombia']},
 
-  L: { teams: ['England',  'Croatia',  'Ghana',  'Panama ']},
+  L: { teams: ['England',  'Croatia',  'Ghana',  'Panama']},
   
   
   
@@ -24,7 +24,7 @@ const WC2026_GROUPS = {
 
 const FLAGS = {
   'Mexico' :'🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czech Republic' :'🇨🇿',
-  'Canada' :'🇨🇦',  'Bosnia and Herzegovina' :'🇧🇦', 'Qatar': '🇶🇦', 'Switzerland' :'🇨🇭 ',
+  'Canada' :'🇨🇦',  'Bosnia and Herzegovina' :'🇧🇦', 'Qatar': '🇶🇦', 'Switzerland' :'🇨🇭',
   'Brazil' :'🇧🇷', 'Morocco': '🇲🇦', 'Haiti' :'🇭🇹', 'Scotland' :'🏴󠁧󠁢󠁳󠁣󠁴󠁿', 
   'United States' :'🇺🇸', 'Paraguay': '🇵🇾' ,'Australia': '🇦🇺' ,'Turkey' :'🇹🇷' ,
   'Germany' :'🇩🇪', 'Curaçao': '🇨🇼' , 'ivory Coast' :'🇨🇮',  'Ecuador' :'🇪🇨',
@@ -96,7 +96,7 @@ const SLOT_LABELS = {
 
 // ── PREMIUM CONFIG ──
 const PAYSTACK_PUBLIC_KEY = 'pk_test_67a0b83955ef8b98f81d7';
-const PREMIUM_AMOUNT = 2000; // GHS 20.00 (Paystack uses pesewas)
+const PREMIUM_AMOUNT = 3000; // GHS 30.00 (Paystack uses pesewas)
 const PREMIUM_KEY = 'wc2026_premium';
 
 function isPremium() {
@@ -151,7 +151,7 @@ function PremiumBanner({ onUnlock }) {
         React.createElement('span', { className: 'premium-crown' }, '👑'),
         React.createElement('div', null,
           React.createElement('p', { className: 'premium-title' }, 'Go Premium'),
-          React.createElement('p', { className: 'premium-sub' }, 'Ad-free · Save predictions · GHS 20 once')
+          React.createElement('p', { className: 'premium-sub' }, 'Ad-free · Save predictions · GHS 30 once')
         )
       ),
       React.createElement('button', {
@@ -162,7 +162,7 @@ function PremiumBanner({ onUnlock }) {
   }
 
   return React.createElement('div', { className: 'premium-form-wrap' },
-    React.createElement('p', { className: 'premium-form-title' }, '👑 Unlock Premium — GHS 20'),
+    React.createElement('p', { className: 'premium-form-title' }, '👑 Unlock Premium — GHS 30'),
     React.createElement('input', {
       className: 'premium-input',
       type: 'email',
@@ -175,7 +175,7 @@ function PremiumBanner({ onUnlock }) {
         className: 'premium-pay-btn',
         onClick: handlePay,
         disabled: loading
-      }, loading ? 'Opening...' : '💳 Pay GHS 20'),
+      }, loading ? 'Opening...' : '💳 Pay GHS 30'),
       React.createElement('button', {
         className: 'premium-cancel-btn',
         onClick: () => setShowForm(false)
