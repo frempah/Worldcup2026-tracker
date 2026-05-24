@@ -2,6 +2,8 @@ const { useState, useEffect } = React;
 
 const API_KEY = '63966ee47080428881fe646971ee918f';
 const BASE_URL = 'https://api.football-data.org/v4';
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9960426175142172"
+     crossorigin="anonymous"></script>
 
 // ── PREMIUM CONFIG ──
 const PAYSTACK_PUBLIC_KEY = 'pk_test_67a0b83955ef8b9bf81d7';
