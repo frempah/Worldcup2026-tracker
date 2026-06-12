@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>World Cup 2026 Tracker — FrempahBrand</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070c18;
+  --surface:#0f1525;
+  --card:#161d30;
+  --gold:#c9a84c;
+  --gold2:#e8c45a;
+  --gold-dim:rgba(201,168,76,.12);
+  --gold-glow:rgba(201,168,76,.25);
+  --text:#f0f0f0;
+  --muted:#8892a4;
+  --border:rgba(255,255,255,.07);
+  --green:#4ade80;
+  --blue:#38bdf8;
+  --red:#f87171;
+  --font-d:'Bebas Neue',sans-serif;
+  --font-b:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-b);
+  line-height:1.5;
+  overflow-x:hidden;
+}
+
+/* ─── HERO ─────────────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:2rem 1.5rem 1rem;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%,rgba(201,168,76,.18),transparent),
+    radial-gradient(ellipse 60% 60% at 80% 110%,rgba(56,189,248,.08),transparent);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.3rem .9rem;
+  background:var(--gold-dim);
+  border:1px solid rgba(201,168,76,.3);
+  border-radius:99px;
+  font-size:.7rem;font-weight:700;
+  color:var(--gold);letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:1.2rem;
+  position:relative;z-index:1;
+}
+.eyebrow-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);
+  animation:blink 2s ease infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero-title{
+  font-family:var(--font-d);
+  font-size:clamp(2.8rem,8vw,5.5rem);
+  line-height:.92;
+  letter-spacing:3px;
+  position:relative;z-index:1;
+  margin-bottom:.6rem;
+}
+.hero-title .line1{
+  display:block;
+  background:linear-gradient(135deg,#f0f0f0 30%,var(--muted));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-title .line2{
+  display:block;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  font-size:clamp(.85rem,2.5vw,1.05rem);
+  color:var(--muted);
+  max-width:400px;
+  line-height:1.65;
+  position:relative;z-index:1;
+  margin-bottom:2rem;
+}
+
+.hero-ctas{
+  display:flex;gap:.75rem;flex-wrap:wrap;
+  justify-content:center;
+  position:relative;z-index:1;
+  margin-bottom:3rem;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.75rem 1.6rem;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border-radius:12px;color:#0a0e1a;
+  font-size:.88rem;font-weight:800;
+  letter-spacing:.3px;
+  text-decoration:none;
+  transition:transform .15s,box-shadow .15s;
+  box-shadow:0 8px 32px rgba(201,168,76,.3);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,168,76,.4)}
+.btn-primary:active{transform:scale(.97)}
+
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.75rem 1.5rem;
+  border:1px solid var(--border);
+  border-radius:12px;color:var(--muted);
+  font-size:.88rem;font-weight:600;
+  text-decoration:none;
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(8px);
+  transition:all .2s;
+}
+.btn-ghost:hover{border-color:rgba(201,168,76,.4);color:var(--gold)}
+
+/* ─── PHONE MOCKUP STAGE ───────────────────────────── */
+.phone-stage{
+  position:relative;z-index:1;
+  display:flex;align-items:flex-end;justify-content:center;
+  gap:-20px;
+  margin-bottom:1rem;
+  width:100%;max-width:700px;
+}
+
+.phone-wrap{
+  position:relative;
+  flex-shrink:0;
+}
+.phone-wrap.center{
+  z-index:10;transform:translateY(0) scale(1);
+}
+.phone-wrap.left{
+  z-index:5;
+  transform:translateX(30px) translateY(24px) rotate(-6deg) scale(.82);
+  opacity:.75;
+}
+.phone-wrap.right{
+  z-index:5;
+  transform:translateX(-30px) translateY(24px) rotate(6deg) scale(.82);
+  opacity:.75;
+}
+
+.phone{
+  width:220px;
+  background:#0f1525;
+  border-radius:36px;
+  border:2px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.8),
+    0 30px 80px rgba(0,0,0,.7),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  overflow:hidden;
+  position:relative;
+}
+.phone-notch{
+  width:80px;height:20px;
+  background:#0a0e1a;
+  border-radius:0 0 14px 14px;
+  margin:0 auto;
+  position:relative;z-index:5;
+}
+.phone-screen{
+  background:var(--bg);
+  min-height:420px;
+  overflow:hidden;
+}
+
+/* ── Screen: Countdown ── */
+.s-countdown{padding:.75rem .6rem;}
+.s-header{
+  display:flex;flex-direction:column;align-items:center;
+  padding:.5rem .4rem .6rem;
+  border-bottom:1px solid var(--border);
+  margin-bottom:.6rem;
+}
+.s-trophy{font-size:1.1rem;margin-bottom:.1rem;}
+.s-htitle{
+  font-family:var(--font-d);font-size:.9rem;
+  color:var(--gold);letter-spacing:2px;
+}
+.s-hsub{font-size:.38rem;color:var(--muted);margin-top:.1rem;}
+
+.s-tabs{
+  display:flex;gap:.2rem;
+  padding:.25rem;background:var(--surface);
+  border-radius:8px;margin-bottom:.6rem;
+}
+.s-tab{
+  flex:1;padding:.28rem .2rem;
+  border-radius:5px;
+  font-size:.32rem;font-weight:600;
+  color:var(--muted);text-align:center;
+}
+.s-tab.on{background:var(--gold);color:#0a0e1a;font-weight:800;}
+
+.cd-mini-match{
+  background:var(--surface);border:1px solid rgba(201,168,76,.2);
+  border-radius:10px;padding:.55rem .5rem;
+  text-align:center;margin-bottom:.5rem;
+}
+.cd-mini-badge{
+  font-size:.3rem;font-weight:800;color:var(--gold);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:.3rem;
+  display:flex;align-items:center;justify-content:center;gap:.2rem;
+}
+.cd-mini-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:var(--gold);animation:blink 2s infinite;
+}
+.cd-mini-teams{
+  display:flex;align-items:center;justify-content:center;
+  gap:.5rem;margin-bottom:.25rem;
+}
+.cd-mini-team{display:flex;flex-direction:column;align-items:center;gap:.15rem;}
+.cd-mini-flag{font-size:.9rem;}
+.cd-mini-name{font-size:.32rem;font-weight:700;}
+.cd-mini-vs{font-size:.5rem;color:var(--muted);font-family:var(--font-d);}
+.cd-mini-info{font-size:.28rem;color:var(--muted);}
+
+.cd-mini-timer{
+  display:flex;align-items:center;justify-content:center;
+  gap:.2rem;margin-bottom:.5rem;
+}
+.cd-mini-unit{
+  display:flex;flex-direction:column;align-items:center;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:.35rem .3rem;min-width:28px;
+}
+.cd-mini-num{
+  font-family:var(--font-d);font-size:.85rem;
+  color:var(--gold);line-height:1;
+}
+.cd-mini-lbl{font-size:.22rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.cd-mini-sep{font-family:var(--font-d);font-size:.7rem;color:rgba(201,168,76,.3);margin-bottom:.5rem;}
+
+.cd-mini-stats{display:flex;gap:.2rem;}
+.cd-mini-stat{
+  flex:1;background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:.3rem .2rem;text-align:center;
+}
+.cd-mini-sn{font-family:var(--font-d);font-size:.65rem;color:var(--gold);}
+.cd-mini-sl{font-size:.22rem;color:var(--muted);}
+
+/* ── Screen: Groups ── */
+.s-groups{padding:.5rem .4rem;}
+.s-ghead{
+  font-family:var(--font-d);font-size:.7rem;color:var(--gold);
+  letter-spacing:1.5px;margin-bottom:.35rem;
+}
+.s-pills{display:flex;flex-wrap:wrap;gap:.15rem;margin-bottom:.45rem;}
+.s-pill{
+  padding:.18rem .4rem;background:var(--card);
+  border:1px solid var(--border);border-radius:99px;
+  font-size:.28rem;font-weight:700;color:var(--muted);
+}
+.s-pill.on{background:var(--gold);color:#0a0e1a;border-color:var(--gold);}
+.s-gtable{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+}
+.s-gthead{
+  padding:.3rem .4rem;
+  background:var(--gold-dim);border-bottom:1px solid var(--border);
+}
+.s-gtlabel{font-family:var(--font-d);font-size:.5rem;color:var(--gold);letter-spacing:1.5px;}
+.s-gtr{
+  display:flex;align-items:center;
+  padding:.28rem .4rem;
+  border-bottom:1px solid var(--border);
+  font-size:.3rem;
+}
+.s-gtr:last-child{border-bottom:none;}
+.s-gtr.qualify{background:rgba(201,168,76,.04);}
+.s-gtr-flag{font-size:.6rem;margin-right:.25rem;}
+.s-gtr-name{flex:1;font-weight:600;font-size:.3rem;}
+.s-gtr-stat{width:12px;text-align:center;color:var(--muted);font-size:.28rem;}
+.s-gtr-pts{color:var(--gold);font-weight:800;}
+
+/* ── Screen: Bracket ── */
+.s-bracket{padding:.5rem .4rem;}
+.s-bhead{font-family:var(--font-d);font-size:.7rem;color:var(--gold);letter-spacing:1.5px;margin-bottom:.35rem;}
+.s-rounds{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.45rem;}
+.s-round{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.3rem .4rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:6px;
+}
+.s-round.on{background:var(--gold-dim);border-color:rgba(201,168,76,.35);}
+.s-round-l{font-size:.3rem;font-weight:700;color:var(--muted);}
+.s-round.on .s-round-l{color:var(--text);}
+.s-round-c{
+  font-size:.26rem;background:var(--card);color:var(--muted);
+  padding:.1rem .3rem;border-radius:99px;
+}
+.s-round.on .s-round-c{background:var(--gold);color:#0a0e1a;}
+.s-bcard{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:.4rem;
+}
+.s-bnum{font-size:.26rem;font-weight:800;color:var(--muted);letter-spacing:.8px;margin-bottom:.3rem;}
+.s-bteam{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--card);border-radius:5px;padding:.25rem .3rem;
+}
+.s-bflag{font-size:.55rem;}
+.s-bname{font-size:.3rem;font-weight:700;flex:1;margin-left:.2rem;}
+.s-bscore{font-family:var(--font-d);font-size:.55rem;color:var(--gold);}
+.s-bdiv{
+  display:flex;align-items:center;justify-content:center;
+  padding:.12rem 0;font-size:.24rem;color:var(--muted);font-weight:800;letter-spacing:1.5px;
+}
+
+/* ─── STATS STRIP ──────────────────────────────────── */
+.stats-strip{
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:.5rem 2rem;
+  padding:2rem 1.5rem;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+.stat-item{text-align:center;}
+.stat-n{
+  font-family:var(--font-d);font-size:clamp(1.8rem,5vw,3rem);
+  color:var(--gold);letter-spacing:2px;line-height:1;
+  display:block;
+}
+.stat-l{font-size:.72rem;color:var(--muted);font-weight:600;letter-spacing:.5px;}
+
+/* ─── FEATURES ─────────────────────────────────────── */
+.features{
+  padding:4rem 1.5rem;
+  max-width:900px;margin:0 auto;
+}
+.section-eyebrow{
+  font-size:.65rem;font-weight:800;color:var(--gold);
+  letter-spacing:2.5px;text-transform:uppercase;
+  margin-bottom:.6rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.section-eyebrow::before{
+  content:'';display:block;width:20px;height:1px;background:var(--gold);
+}
+.section-title{
+  font-family:var(--font-d);
+  font-size:clamp(1.8rem,5vw,2.8rem);
+  letter-spacing:2px;
+  margin-bottom:.6rem;
+  line-height:1;
+}
+.section-sub{font-size:.88rem;color:var(--muted);max-width:360px;line-height:1.6;margin-bottom:2.5rem;}
+
+.feat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1rem;
+}
+.feat-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1.2rem;
+  transition:border-color .2s,transform .2s;
+}
+.feat-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-2px);}
+.feat-icon-wrap{
+  width:40px;height:40px;
+  border-radius:10px;
+  background:var(--gold-dim);
+  border:1px solid rgba(201,168,76,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.75rem;
+  font-size:1.1rem;
+}
+.feat-title{font-size:.88rem;font-weight:700;margin-bottom:.3rem;}
+.feat-body{font-size:.76rem;color:var(--muted);line-height:1.55;}
+
+/* ─── SCREENS CAROUSEL ─────────────────────────────── */
+.screens{
+  padding:3rem 0;
+  background:var(--surface);
+  overflow:hidden;
+}
+.screens-inner{padding:0 1.5rem;max-width:900px;margin:0 auto;}
+.screens-label{
+  font-family:var(--font-d);font-size:clamp(1.5rem,4vw,2.2rem);
+  letter-spacing:2px;margin-bottom:.4rem;
+}
+.screens-sub{font-size:.82rem;color:var(--muted);margin-bottom:2rem;}
+.screens-row{
+  display:flex;gap:1rem;
+  overflow-x:auto;
+  padding-bottom:1rem;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.screens-row::-webkit-scrollbar{display:none;}
+
+.screen-card{
+  flex-shrink:0;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  width:180px;
+}
+.screen-label{
+  padding:.55rem .75rem;
+  border-bottom:1px solid var(--border);
+  font-size:.72rem;font-weight:700;
+  color:var(--gold);
+  display:flex;align-items:center;gap:.35rem;
+}
+.screen-label-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--gold);
+}
+.screen-preview{
+  height:160px;background:var(--bg);
+  padding:.5rem;
+  overflow:hidden;
+}
+
+/* ─── HOW IT WORKS ─────────────────────────────────── */
+.how{
+  padding:4rem 1.5rem;
+  max-width:900px;margin:0 auto;
+}
+.steps{display:flex;flex-direction:column;gap:1rem;margin-top:2rem;}
+.step{
+  display:flex;align-items:flex-start;gap:1rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:1.1rem;
+}
+.step-num{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--gold);color:#0a0e1a;
+  font-family:var(--font-d);font-size:1rem;letter-spacing:1px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.step-body{}
+.step-title{font-size:.88rem;font-weight:700;margin-bottom:.2rem;}
+.step-text{font-size:.78rem;color:var(--muted);line-height:1.55;}
+
+/* ─── CTA SECTION ──────────────────────────────────── */
+.cta-section{
+  padding:4rem 1.5rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,168,76,.1),transparent);
+  pointer-events:none;
+}
+.cta-title{
+  font-family:var(--font-d);
+  font-size:clamp(2rem,6vw,3.5rem);
+  letter-spacing:3px;
+  line-height:.95;
+  margin-bottom:1rem;
+  position:relative;z-index:1;
+}
+.cta-title span{
+  display:block;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.cta-sub{
+  font-size:.88rem;color:var(--muted);max-width:320px;
+  margin:0 auto 2rem;line-height:1.65;
+  position:relative;z-index:1;
+}
+.cta-url{
+  display:inline-block;
+  padding:.5rem 1.2rem;
+  background:var(--gold-dim);
+  border:1px solid rgba(201,168,76,.3);
+  border-radius:8px;
+  font-size:.78rem;font-weight:700;color:var(--gold);
+  font-family:monospace;letter-spacing:.5px;
+  margin-bottom:1.5rem;
+  position:relative;z-index:1;
+}
+.cta-install{
+  display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;
+  position:relative;z-index:1;
+}
+.install-step{
+  display:flex;align-items:center;gap:.4rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:.6rem .9rem;
+}
+.install-num{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--gold);color:#0a0e1a;
+  font-size:.65rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.install-txt{font-size:.72rem;color:var(--muted);}
+
+/* ─── FOOTER ───────────────────────────────────────── */
+footer{
+  padding:2rem 1.5rem;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+.footer-logo{
+  font-family:var(--font-d);font-size:1.3rem;
+  color:var(--gold);letter-spacing:3px;
+  margin-bottom:.4rem;
+}
+.footer-dev{
+  font-size:.75rem;color:var(--muted);
+  margin-bottom:.75rem;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  flex-wrap:wrap;
+}
+.footer-dev a{color:var(--gold);text-decoration:none;font-weight:600;}
+.footer-dev a:hover{text-decoration:underline;}
+.footer-links{
+  display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;
+  font-size:.72rem;
+}
+.footer-links a{color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{margin-top:1rem;font-size:.67rem;color:rgba(136,146,164,.5);}
+
+/* ─── RESPONSIVE ───────────────────────────────────── */
+@media(max-width:480px){
+  .feat-grid{grid-template-columns:1fr;}
+  .phone-wrap.left,.phone-wrap.right{display:none;}
+  .phone-stage{justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="eyebrow">
+    <div class="eyebrow-dot"></div>
+    FREE PWA · NO APP STORE REQUIRED
+  </div>
+
+  <h1 class="hero-title">
+    <span class="line1">2026 WORLD CUP</span>
+    <span class="line2">TRACKER</span>
+  </h1>
+  <p class="hero-sub">
+    Every match. Every group. Every bracket moment.
+    Track the biggest World Cup in history — live,
+    free, on any phone.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="https://world26trphy.netlify.app/" target="_blank" class="btn-primary">
+      ⚽ &nbsp;Install Free Now
+    </a>
+    <a href="https://frempah.github.io/LandingPage./" target="_blank" class="btn-ghost">
+      FrempahBrand ↗
+    </a>
+  </div>
+
+  <!-- Three-phone mockup -->
+  <div class="phone-stage">
+
+    <!-- Left phone — Groups screen -->
+    <div class="phone-wrap left">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="s-header">
+            <div class="s-trophy">🏆</div>
+            <div class="s-htitle">WORLD CUP 2026</div>
+            <div class="s-hsub">Track Every Match · Build Your Bracket</div>
+          </div>
+          <div style="padding:.4rem .5rem;">
+            <div class="s-tabs">
+              <div class="s-tab">📅</div>
+              <div class="s-tab on">🗂</div>
+              <div class="s-tab">🏆</div>
+              <div class="s-tab">🎯</div>
+            </div>
+            <div class="s-groups">
+              <div class="s-ghead">GROUP STAGE</div>
+              <div class="s-pills">
+                <div class="s-pill on">Group A</div>
+                <div class="s-pill">Group B</div>
+                <div class="s-pill">Group C</div>
+                <div class="s-pill">Group D</div>
+                <div class="s-pill">Group E</div>
+                <div class="s-pill">Group F</div>
+              </div>
+              <div class="s-gtable">
+                <div class="s-gthead"><div class="s-gtlabel">GROUP A</div></div>
+                <div class="s-gtr qualify">
+                  <span class="s-gtr-flag">🇲🇽</span>
+                  <span class="s-gtr-name">Mexico</span>
+                  <span class="s-gtr-stat">0</span><span class="s-gtr-stat">0</span>
+                  <span class="s-gtr-stat">0</span><span class="s-gtr-stat">0</span>
+                  <span class="s-gtr-stat s-gtr-pts">0</span>
+                </div>
+                <div class="s-gtr qualify">
+                  <span class="s-gtr-flag">🇿🇦</span>
+                  <span class="s-gtr-name">South Africa</span>
+                  <span class="s-gtr-stat">0</span><span class="s-gtr-stat">0</span>
+                  <span class="s-gtr-stat">0</span><span class="s-gtr-stat">0</span>
+                  <span class="s-gtr-stat s-gtr-pts">0</span>
+                </div>
+                <div class="s-gtr">
+                  <span class="s-gtr-flag">🇰🇷</span>
+                  <span class="s-gtr-name">South Korea</span>
+                  <span class="s-gtr-stat">0</span><span class="s-gtr-stat">0</span>
+                  <span class="s-gtr-stat">0</span><span class="s-gtr-stat">0</span>
+                  <span class="s-gtr-stat s-gtr-pts">0</span>
+                </div>
+                <div class="s-gtr">
+                  <span class="s-gtr-flag">🇨🇿</span>
+                  <span class="s-gtr-name">Czechia</span>
+                  <span class="s-gtr-stat">0</span><span class="s-gtr-stat">0</span>
+                  <span class="s-gtr-stat">0</span><span class="s-gtr-stat">0</span>
+                  <span class="s-gtr-stat s-gtr-pts">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center phone — Countdown / Matches screen -->
+    <div class="phone-wrap center">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="s-header">
+            <div class="s-trophy">🏆</div>
+            <div class="s-htitle">WORLD CUP 2026</div>
+            <div class="s-hsub">Track Every Match · Build Your Bracket</div>
+          </div>
+          <div style="padding:.4rem .5rem;">
+            <div class="s-tabs">
+              <div class="s-tab on">📅</div>
+              <div class="s-tab">🗂</div>
+              <div class="s-tab">🏆</div>
+              <div class="s-tab">🎯</div>
+            </div>
+            <div class="s-countdown">
+              <div class="cd-mini-match">
+                <div class="cd-mini-badge">
+                  <div class="cd-mini-dot"></div>
+                  OPENING MATCH
+                </div>
+                <div class="cd-mini-teams">
+                  <div class="cd-mini-team">
+                    <div class="cd-mini-flag">🇲🇽</div>
+                    <div class="cd-mini-name">Mexico</div>
+                  </div>
+                  <div class="cd-mini-vs">VS</div>
+                  <div class="cd-mini-team">
+                    <div class="cd-mini-flag">🇿🇦</div>
+                    <div class="cd-mini-name">South Africa</div>
+                  </div>
+                </div>
+                <div class="cd-mini-info">📍 Estadio Azteca · Jun 11 · 3PM ET</div>
+              </div>
+              <div class="cd-mini-timer">
+                <div class="cd-mini-unit">
+                  <div class="cd-mini-num" id="cd-d">01</div>
+                  <div class="cd-mini-lbl">DAYS</div>
+                </div>
+                <div class="cd-mini-sep">:</div>
+                <div class="cd-mini-unit">
+                  <div class="cd-mini-num" id="cd-h">12</div>
+                  <div class="cd-mini-lbl">HRS</div>
+                </div>
+                <div class="cd-mini-sep">:</div>
+                <div class="cd-mini-unit">
+                  <div class="cd-mini-num" id="cd-m">34</div>
+                  <div class="cd-mini-lbl">MIN</div>
+                </div>
+                <div class="cd-mini-sep">:</div>
+                <div class="cd-mini-unit">
+                  <div class="cd-mini-num" id="cd-s">56</div>
+                  <div class="cd-mini-lbl">SEC</div>
+                </div>
+              </div>
+              <div class="cd-mini-stats">
+                <div class="cd-mini-stat"><div class="cd-mini-sn">48</div><div class="cd-mini-sl">Teams</div></div>
+                <div class="cd-mini-stat"><div class="cd-mini-sn">104</div><div class="cd-mini-sl">Matches</div></div>
+                <div class="cd-mini-stat"><div class="cd-mini-sn">12</div><div class="cd-mini-sl">Groups</div></div>
+                <div class="cd-mini-stat"><div class="cd-mini-sn">39</div><div class="cd-mini-sl">Days</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right phone — Bracket screen -->
+    <div class="phone-wrap right">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="s-header">
+            <div class="s-trophy">🏆</div>
+            <div class="s-htitle">WORLD CUP 2026</div>
+            <div class="s-hsub">Track Every Match · Build Your Bracket</div>
+          </div>
+          <div style="padding:.4rem .5rem;">
+            <div class="s-tabs">
+              <div class="s-tab">📅</div>
+              <div class="s-tab">🗂</div>
+              <div class="s-tab on">🏆</div>
+              <div class="s-tab">🎯</div>
+            </div>
+            <div class="s-bracket">
+              <div class="s-bhead">KNOCKOUT BRACKET</div>
+              <div class="s-rounds">
+                <div class="s-round on">
+                  <div class="s-round-l">Round of 32</div>
+                  <div class="s-round-c">16 Matches</div>
+                </div>
+                <div class="s-round">
+                  <div class="s-round-l">Round of 16</div>
+                  <div class="s-round-c">8 Matches</div>
+                </div>
+                <div class="s-round">
+                  <div class="s-round-l">Quarter Finals</div>
+                  <div class="s-round-c">4 Matches</div>
+                </div>
+                <div class="s-round">
+                  <div class="s-round-l">The Final</div>
+                  <div class="s-round-c">1 Match</div>
+                </div>
+              </div>
+              <div class="s-bcard">
+                <div class="s-bnum">MATCH 1</div>
+                <div class="s-bteam">
+                  <span class="s-bflag">🇲🇽</span>
+                  <span class="s-bname">Win Group A</span>
+                  <span class="s-bscore">—</span>
+                </div>
+                <div class="s-bdiv">VS</div>
+                <div class="s-bteam">
+                  <span class="s-bflag">🇨🇦</span>
+                  <span class="s-bname">2nd Group B</span>
+                  <span class="s-bscore">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /phone-stage -->
+</section>
+
+<!-- ═══════════ STATS STRIP ═══════════ -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <span class="stat-n">48</span>
+    <span class="stat-l">TEAMS</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-n">104</span>
+    <span class="stat-l">MATCHES</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-n">12</span>
+    <span class="stat-l">GROUPS</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-n">16</span>
+    <span class="stat-l">HOST CITIES</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-n">39</span>
+    <span class="stat-l">DAYS OF FOOTBALL</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-n">100%</span>
+    <span class="stat-l">FREE</span>
+  </div>
+</div>
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section class="features">
+  <div class="section-eyebrow">What's inside</div>
+  <h2 class="section-title">EVERYTHING YOU<br>NEED IN ONE APP</h2>
+  <p class="section-sub">
+    Built for the 2026 FIFA World Cup format —
+    the first ever with 48 teams and a new
+    Round of 32 knockout stage.
+  </p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon-wrap">📅</div>
+      <div class="feat-title">Live Match Scores</div>
+      <div class="feat-body">
+        Real-time scores and results for all 104 matches.
+        Live indicator shows active games as they happen.
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-wrap">🗂</div>
+      <div class="feat-title">All 12 Groups</div>
+      <div class="feat-body">
+        Complete group standings for all 12 official
+        FIFA 2026 groups. Updated automatically.
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-wrap">🏆</div>
+      <div class="feat-title">Full Bracket</div>
+      <div class="feat-body">
+        Knockout bracket from Round of 32 through
+        to the Final at MetLife Stadium on July 19.
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-wrap">🎯</div>
+      <div class="feat-title">Match Predictions</div>
+      <div class="feat-body">
+        Predict all 57 matches from Group Stage
+        to the Final. Track your accuracy throughout.
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-wrap">📲</div>
+      <div class="feat-title">No App Store</div>
+      <div class="feat-body">
+        Installs on any phone in 2 taps directly
+        from the browser. No download. No account.
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-wrap">⚡</div>
+      <div class="feat-title">Works Offline</div>
+      <div class="feat-body">
+        Service worker caches the app locally.
+        Works even with limited connectivity.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="how">
+  <div class="section-eyebrow">Setup in seconds</div>
+  <h2 class="section-title">ON YOUR PHONE<br>IN 2 TAPS</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Open the link in your browser</div>
+        <div class="step-text">
+          Visit world26trphy.netlify.app in Safari (iPhone)
+          or Chrome (Android). The app loads instantly.
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Add to Home Screen</div>
+        <div class="step-text">
+          iPhone: tap the Share button ⬆ then "Add to Home Screen."
+          Android: tap Install when the banner appears.
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Track every match from June 11</div>
+        <div class="step-text">
+          The app icon is now on your homescreen.
+          Live scores activate at kickoff on June 11.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <h2 class="cta-title">
+    THE WORLD CUP<br>
+    <span>STARTS JUNE 11</span>
+  </h2>
+  <p class="cta-sub">
+    48 nations compete. 5 billion people watch.
+    Track every moment free — no download,
+    no App Store, no account needed.
+  </p>
+  <div class="cta-url">world26trphy.netlify.app</div>
+  <div class="cta-install">
+    <div class="install-step">
+      <div class="install-num">1</div>
+      <div class="install-txt">Open the link</div>
+    </div>
+    <div class="install-step">
+      <div class="install-num">2</div>
+      <div class="install-txt">Tap Add to Home Screen</div>
+    </div>
+    <div class="install-step">
+      <div class="install-num">3</div>
+      <div class="install-txt">Track live ✅</div>
+    </div>
+  </div>
+  <br><br>
+  <a href="https://world26trphy.netlify.app/" target="_blank" class="btn-primary" style="font-size:1rem;padding:.9rem 2.2rem;">
+    ⚽ &nbsp; Install Free — world26trphy.netlify.app
+  </a>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-logo">WORLD CUP 2026 TRACKER</div>
+  <div class="footer-dev">
+    Built by
+    <a href="https://frempah.github.io/LandingPage./" target="_blank">FrempahBrand</a>
+    &nbsp;·&nbsp;
+    <a href="https://frempah.github.io/LandingPage./" target="_blank">FrempahBrand.github.io</a>
+  </div>
+  <div class="footer-links">
+    <a href="https://world26trphy.netlify.app/" target="_blank">Open App</a>
+    <a href="https://world26trphy.netlify.app/about.html" target="_blank">About</a>
+    <a href="https://world26trphy.netlify.app/privacy.html" target="_blank">Privacy Policy</a>
+    <a href="https://x.com/frempahbrand_" target="_blank">X / Twitter</a>
+  </div>
+  <div class="footer-copy">© 2026 FrempahBrand · All rights reserved</div>
+</footer>
+
+<script>
+// Live countdown in the phone mockup
+var KICKOFF = new Date('2026-06-11T19:00:00Z').getTime();
+function updateCD(){
+  var diff = KICKOFF - Date.now();
+  if(diff <= 0) return;
+  var d = Math.floor(diff/86400000);
+  var h = Math.floor((diff%86400000)/3600000);
+  var m = Math.floor((diff%3600000)/60000);
+  var s = Math.floor((diff%60000)/1000);
+  function p(n){return String(n).padStart(2,'0');}
+  var ed = document.getElementById('cd-d');
+  var eh = document.getElementById('cd-h');
+  var em = document.getElementById('cd-m');
+  var es = document.getElementById('cd-s');
+  if(ed) ed.textContent = d;
+  if(eh) eh.textContent = p(h);
+  if(em) em.textContent = p(m);
+  if(es) es.textContent = p(s);
+}
+updateCD();
+setInterval(updateCD, 1000);
+</script>
+</body>
+</html>
