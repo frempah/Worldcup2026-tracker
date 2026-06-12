@@ -1,24 +1,30 @@
-exports.handler = async () => {
+const https = require('https');
+
+module.exports = async function(req, res) {
+  const key = process.env.FOOTBALL_API_KEY;
+
+  if (!key) {
+    return res.status(500).json({ error: 'API key not configured' });
+  }
+
   try {
-    const res = await fetch(
+    const response = await fetch(
       'https://api.football-data.org/v4/competitions/WC/matches',
-      { headers: { 'X-Auth-Token': process.env.FOOTBALL_API_KEY } }
+      {
+        headers: {
+          'X-Auth-Token': key,
+          'Content-Type': 'application/json'
+        }
+      }
     );
-    if (!res.ok) throw new Error('API error ' + res.status);
-    const data = await res.json();
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type':                'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Cache-Control':               'public, max-age=300'
-      },
-      body: JSON.stringify(data)
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: err.message })
-    };
+
+    const data = await response.json();
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=300');
+    res.status(200).json(data);
+
+  } catch(err) {
+    res.status(500).json({ error: err.message });
   }
 };
